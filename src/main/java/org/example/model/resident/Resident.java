@@ -15,5 +15,5 @@ public abstract class Resident {
     private FullName fullName;
     private Comment comment;
     private Region region;
-    private List<File> photos;
+    private List<File> files;
 }

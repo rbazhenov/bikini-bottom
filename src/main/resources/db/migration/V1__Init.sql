@@ -49,7 +49,7 @@ create table if not exists ${flyway:defaultSchema}.file_meta
                                primary key,
     name               varchar(255) not null,
     type               varchar(255) not null,
-    external_id        varchar(255) not null,
+    external_id        varchar(255),
     deleted            boolean default false,
     creation_time      timestamp     not null,
     last_modified_time timestamp     not null

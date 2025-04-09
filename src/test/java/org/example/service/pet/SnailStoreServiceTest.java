@@ -13,21 +13,21 @@ import java.time.ZonedDateTime;
 class SnailStoreServiceTest {
 
     @Autowired
-    private SnailStoreService service;
+    private SnailStoreService storeService;
 
     @Test
     void updateLastModifiedTest() {
         Snail snail = new Snail();
         snail.setAge(10);
-        String id = service.save(snail);
+        String id = storeService.save(snail);
 
-        SnailEntity entity = service.getEntityById(id).get();
+        SnailEntity entity = storeService.getEntityById(id).get();
         ZonedDateTime lmtBefore = entity.getLastModifiedTime();
 
         entity.setAge(11);
-        service.saveEntity(entity);
+        storeService.saveEntity(entity);
 
-        ZonedDateTime lmtAfter = service.getEntityById(id).get().getLastModifiedTime();
+        ZonedDateTime lmtAfter = storeService.getEntityById(id).get().getLastModifiedTime();
 
         Assertions.assertNotEquals(lmtBefore, lmtAfter);
     }

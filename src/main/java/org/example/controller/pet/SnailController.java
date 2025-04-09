@@ -23,21 +23,21 @@ public class SnailController {
 
     public static final String PATH = "/api/pet/snail/";
 
-    private SnailStoreService service;
+    private SnailStoreService storeService;
 
     @GetMapping("/list")
     public ResponseEntity<List<Snail>> getAll() {
-        return ResponseEntity.ok(service.getAll());
+        return ResponseEntity.ok(storeService.getAll());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Optional<Snail>> getOne(@PathVariable(value = "id") String id) {
-        return ResponseEntity.ok(service.getById(id));
+        return ResponseEntity.ok(storeService.getById(id));
     }
 
     @PostMapping("/save")
     public ResponseEntity<Void> save(@RequestBody Snail dto) {
-        service.save(dto);
+        storeService.save(dto);
         return ResponseEntity.ok().build();
     }
 

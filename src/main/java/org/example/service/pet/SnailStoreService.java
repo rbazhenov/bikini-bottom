@@ -8,7 +8,6 @@ import org.example.repository.SnailRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -42,15 +41,10 @@ public class SnailStoreService {
 
     public String save(Snail dto) {
         SnailEntity toSave = mapper.toEntity(dto);
-        //todo autoset while saving
-        toSave.setCreationTime(ZonedDateTime.now());
-        toSave.setLastModifiedTime(ZonedDateTime.now());
-        SnailEntity saved = repository.save(toSave);
-
-        return saved.getId();
+        return saveEntity(toSave);
     }
 
-    public void saveEntity(SnailEntity entity) {
-        repository.save(entity);
+    public String saveEntity(SnailEntity entity) {
+        return repository.save(entity).getId();
     }
 }

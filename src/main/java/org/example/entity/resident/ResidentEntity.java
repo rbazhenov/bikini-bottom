@@ -38,14 +38,14 @@ public abstract class ResidentEntity extends BaseEntity {
     @JoinColumn(name = "comment_id")
     private CommentEntity comment;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private RegionEntity region;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "resident_file_meta",
             joinColumns = @JoinColumn(name = "resident_id"),
             inverseJoinColumns = @JoinColumn(name = "file_id")
     )
-    private List<FileEntity> photos;
+    private List<FileEntity> files;
 }
