@@ -34,10 +34,12 @@ create table if not exists ${flyway:defaultSchema}.comment
 
 create table if not exists ${flyway:defaultSchema}.club
 (
-    id          varchar(255) not null
-                    constraint club_pkey
-                        primary key,
-    name        varchar(255) not null
+    id         varchar(255) not null
+                           constraint club_pkey
+                               primary key,
+    name               varchar(255) not null,
+    creation_time      timestamp     not null,
+    last_modified_time timestamp     not null
 );
 
 create table if not exists ${flyway:defaultSchema}.file_meta
@@ -74,7 +76,7 @@ create table if not exists ${flyway:defaultSchema}.resident
     first_name         varchar(255),
     last_name          varchar(255),
     comment_id         varchar(255) references comment (id),
-    region             varchar(255) references region (id),
+    region_id          varchar(255) references region (id),
     creation_time      timestamp     not null,
     last_modified_time timestamp     not null
 );

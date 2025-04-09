@@ -21,7 +21,7 @@ public class ClubEntity extends BaseEntity {
     private String name;
 
     @OneToMany
-    @JoinColumn(name = "partner_employee_id")
+    @JoinColumn(name = "club_id")
     private List<LocalResidentEntity> members;
 
     //спортсмены, рестораны, наука
