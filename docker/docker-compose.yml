@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  bikini-bottom:
+    image: postgres:17.4
+    environment:
+      POSTGRES_DB: "bikini-bottom"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      PGDATA: "/var/lib/postgresql/data/pgdata/bikini-bottom"
+    volumes:
+      - .:/var/lib/postgresql/bikini-bottom/data
+    ports:
+      - "3488:5432"

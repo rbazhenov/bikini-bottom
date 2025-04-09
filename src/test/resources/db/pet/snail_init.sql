@@ -1,0 +1,2 @@
+insert into pet_snail (id, mucus_level, age, first_name, last_name, creation_time, last_modified_time)
+VALUES ('snail_test_id_1', 'HIGH', 5, 666, 'fName', 'lName', 'mName', '2025-04-01 11:01:02.44066', '2025-04-01 11:01:02.44066');

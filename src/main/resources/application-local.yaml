@@ -1,0 +1,29 @@
+spring:
+  devtools:
+    add-properties: false
+
+  flyway:
+    out-of-order: true
+    ignore-future-migrations: true
+    baseline-on-migrate: false
+    locations: classpath:db/migration,classpath:db/dev
+
+  datasource:
+    url: jdbc:postgresql://localhost:3488/bikini-bottom
+    username: postgres
+    password: postgres
+    initialization-mode: never
+
+  jpa:
+    hibernate.ddl-auto: validate
+    show-sql: true
+
+test.controller:
+  enabled: true
+
+logging:
+  level:
+    org.example: debug
+    org.hibernate: info
+    org.springframework: info
+    org.apache.logging.log4j: debug
