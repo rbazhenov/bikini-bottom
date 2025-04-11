@@ -21,7 +21,7 @@ public class SnailStoreService {
 
     @Transactional(readOnly = true)
     public Optional<Snail> getById(String id) {
-        return repository.findById(id).map(mapper::toDto);
+        return repository.findById(id).map(mapper::toModel);
     }
 
     @Transactional(readOnly = true)
@@ -31,7 +31,7 @@ public class SnailStoreService {
 
     @Transactional(readOnly = true)
     public List<Snail> getAll() {
-        return mapper.toDto(repository.findAll());
+        return mapper.toModel(repository.findAll());
     }
 
     @Transactional(readOnly = true)

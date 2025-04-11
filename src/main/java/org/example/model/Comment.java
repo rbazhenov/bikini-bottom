@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Comment {
+    private String id;
     private String text;
     private boolean hidden;
 }

@@ -8,11 +8,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface SnailMapper {
-    Snail toDto(SnailEntity entity);
+    Snail toModel(SnailEntity entity);
 
-    SnailEntity toEntity(Snail dto);
+    SnailEntity toEntity(Snail model);
 
-    List<Snail> toDto(List<SnailEntity> entities);
+    List<Snail> toModel(List<SnailEntity> entities);
 
-    List<SnailEntity> toEntity(List<Snail> dtos);
+    List<SnailEntity> toEntity(List<Snail> models);
 }

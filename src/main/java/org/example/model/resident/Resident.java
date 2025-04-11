@@ -12,6 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 public abstract class Resident {
+    private String id;
     private FullName fullName;
     private Comment comment;
     private Region region;

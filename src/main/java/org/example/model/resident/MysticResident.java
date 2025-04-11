@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MysticResident {
+public class MysticResident extends Resident {
     private int appearancePerYear;
 }

@@ -10,7 +10,7 @@ import org.example.model.file.File;
 import org.example.model.file.FileType;
 import org.example.model.resident.Club;
 import org.example.model.resident.LocalResident;
-import org.example.service.resident.LocalResidentStoreService;
+import org.example.service.resident.ResidentServiceResolver;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +25,7 @@ class LocalResidentRepositoryTest {
     private LocalResidentRepository localResidentRepository;
 
     @Autowired
-    private LocalResidentStoreService storeService;
+    private ResidentServiceResolver serviceResolver;
 
     @Test
     void saveFullFilledDto() {
@@ -67,7 +67,7 @@ class LocalResidentRepositoryTest {
         localResident.setRegion(region);
         localResident.setFiles(Arrays.asList(file, file2));
 
-        String id = storeService.save(localResident);
+        String id = serviceResolver.getByResident(localResident).save(localResident).get().getId();
 
         LocalResidentEntity saved = localResidentRepository.findById(id).get();
 

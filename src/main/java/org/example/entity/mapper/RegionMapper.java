@@ -8,11 +8,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface RegionMapper {
-    Region toDto(RegionEntity entity);
+    Region toModel(RegionEntity entity);
 
-    RegionEntity toEntity(Region dto);
+    RegionEntity toEntity(Region model);
 
-    List<Region> toDto(List<RegionEntity> entities);
+    List<Region> toModel(List<RegionEntity> entities);
 
-    List<RegionEntity> toEntity(List<Region> dtos);
+    List<RegionEntity> toEntity(List<Region> models);
 }

@@ -1,9 +1,3 @@
---todo RBS-6 что это, зачем?
---create sequence ${flyway:defaultSchema}.escort_request_numbers;
---alter sequence ${flyway:defaultSchema}.escort_request_numbers owner to ${flyway:user};
---create sequence ${flyway:defaultSchema}.event_sequence;
---alter sequence ${flyway:defaultSchema}.event_sequence owner to ${flyway:user};
-
 create table if not exists ${flyway:defaultSchema}.region
 (
     id          varchar(255) not null

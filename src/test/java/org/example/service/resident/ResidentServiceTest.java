@@ -2,7 +2,7 @@ package org.example.service.resident;
 
 import org.example.SpringApplicationTest;
 import org.example.entity.FullName;
-import org.example.entity.resident.LocalResidentEntity;
+import org.example.entity.resident.ResidentEntity;
 import org.example.model.resident.LocalResident;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -11,10 +11,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.time.ZonedDateTime;
 
 @SpringApplicationTest
-class LocalResidentStoreServiceTest {
+class ResidentServiceTest {
 
     @Autowired
-    private LocalResidentStoreService service;
+    private ResidentServiceResolver resolver;
+    @Autowired
+    private ResidentEntityService entityService;
 
     @Test
     void updateLastModifiedTest() {
@@ -23,17 +25,19 @@ class LocalResidentStoreServiceTest {
         fullName.setLastName("ship");
         LocalResident localResident = new LocalResident();
         localResident.setFullName(fullName);
-        String id = service.save(localResident);
 
-        LocalResidentEntity entity = service.getEntityById(id).get();
+        ResidentService<LocalResident> service = resolver.getByResident(localResident);
+        String id = service.save(localResident).get().getId();
+
+        ResidentEntity entity = entityService.getEntityById(id).get();
         ZonedDateTime lmtBefore = entity.getLastModifiedTime();
 
         String newName = "newName";
         fullName.setFirstName(newName);
         entity.setFullName(fullName);
-        service.saveEntity(entity);
+        entityService.save(entity);
 
-        LocalResidentEntity entityAfter = service.getEntityById(id).get();
+        ResidentEntity entityAfter = entityService.getEntityById(id).get();
 
         Assertions.assertEquals(newName, entityAfter.getFullName().getFirstName());
         Assertions.assertNotEquals(lmtBefore, entityAfter.getLastModifiedTime());

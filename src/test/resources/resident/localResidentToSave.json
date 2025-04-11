@@ -1,0 +1,36 @@
+{
+  "type": "LOCAL_RESIDENT",
+  "club": {
+    "name": "club name"
+  },
+  "awards": [
+    {
+      "name": "award name",
+      "importance": "LEGEND"
+    },
+    {
+      "name": "award name 2",
+      "importance": "HIGH"
+    }
+  ],
+  "fullName": {
+    "firstName": "firstName",
+    "lastName": "lastName"
+  },
+  "comment": {
+    "text": "comment"
+  },
+  "region": {
+    "name": "region name"
+  },
+  "files": [
+    {
+      "name": "file-1",
+      "type": "IMAGE"
+    },
+    {
+      "name": "file-2",
+      "type": "PDF"
+    }
+  ]
+}

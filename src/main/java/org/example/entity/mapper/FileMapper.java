@@ -8,11 +8,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface FileMapper {
-    File toDto(FileEntity entity);
+    File toModel(FileEntity entity);
 
-    FileEntity toEntity(File dto);
+    FileEntity toEntity(File model);
 
-    List<File> toDto(List<FileEntity> entities);
+    List<File> toModel(List<FileEntity> entities);
 
-    List<FileEntity> toEntity(List<File> dtos);
+    List<FileEntity> toEntity(List<File> models);
 }

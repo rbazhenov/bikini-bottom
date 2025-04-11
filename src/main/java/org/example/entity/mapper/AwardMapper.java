@@ -8,11 +8,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface AwardMapper {
-    Award toDto(AwardEntity entity);
+    Award toModel(AwardEntity entity);
 
-    AwardEntity toEntity(Award dto);
+    AwardEntity toEntity(Award model);
 
-    List<Award> toDto(List<AwardEntity> entities);
+    List<Award> toModel(List<AwardEntity> entities);
 
-    List<AwardEntity> toEntity(List<Award> dtos);
+    List<AwardEntity> toEntity(List<Award> models);
 }

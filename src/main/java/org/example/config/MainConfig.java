@@ -1,5 +1,7 @@
 package org.example.config;
 
+import com.querydsl.jpa.impl.JPAQueryFactory;
+import jakarta.persistence.EntityManager;
 import org.example.controller.BpController;
 import org.example.controller.mapper.BpMappers;
 import org.example.entity.BpEntity;
@@ -24,7 +26,6 @@ import java.util.Optional;
 @EnableAsync
 //@EnableFeignClients todo RBS-3
 //@EnableConfigurationProperties todo RBS-4
-//@EnableJpaAuditing //todo RBS-5
 @EntityScan(basePackageClasses = BpEntity.class)
 @EnableJpaRepositories(basePackageClasses = BpRepository.class)
 @ComponentScan(basePackageClasses = {
@@ -39,5 +40,10 @@ public class MainConfig {
     @Bean
     public DateTimeProvider auditingDateTimeProvider() {
         return () -> Optional.of(ZonedDateTime.now());
+    }
+
+    @Bean
+    public JPAQueryFactory jpaQuery(EntityManager entityManager) {
+        return new JPAQueryFactory(entityManager);
     }
 }

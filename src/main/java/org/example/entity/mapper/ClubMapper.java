@@ -8,11 +8,11 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ClubMapper {
-    Club toDto(ClubEntity entity);
+    Club toModel(ClubEntity entity);
 
-    ClubEntity toEntity(Club dto);
+    ClubEntity toEntity(Club model);
 
-    List<Club> toDto(List<ClubEntity> entities);
+    List<Club> toModel(List<ClubEntity> entities);
 
-    List<ClubEntity> toEntity(List<Club> dtos);
+    List<ClubEntity> toEntity(List<Club> models);
 }
