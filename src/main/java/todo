@@ -1,7 +1,5 @@
-docker kafka
 flyway rollback when start app fails
 redis
-kafka
 amazon s3
 
 

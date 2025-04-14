@@ -4,4 +4,7 @@ log.enabled: true
 
 test.controller:
   enabled: false
-  url: /test
+  url: /bikini-bottom/test
+
+integration:
+  bikini.validation.url: http://localhost:8081
