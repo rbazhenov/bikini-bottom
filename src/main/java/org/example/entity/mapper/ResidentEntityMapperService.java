@@ -33,7 +33,7 @@ public class ResidentEntityMapperService {
             if (mapperToEntity.containsKey(mapper.getModelClass())) {
                 log.warn("Mapper to entity {} is doubled, skip one", mapper.getModelClass().getSimpleName());
             } else {
-                log.info("Put toEntity mapper {}", mapper.getModelClass().getSimpleName());
+                log.debug("Put toEntity mapper {}", mapper.getModelClass().getSimpleName());
                 mapperToEntity.put(mapper.getModelClass(), mapper);
             }
 
@@ -41,7 +41,7 @@ public class ResidentEntityMapperService {
                 log.warn("Mapper to model {} is doubled, skip one", mapper.getModelClass().getSimpleName());
 
             } else {
-                log.info("Put toModel mapper {}", mapper.getModelClass().getSimpleName());
+                log.debug("Put toModel mapper {}", mapper.getModelClass().getSimpleName());
                 mapperToModel.put(mapper.getEntityClass(), mapper);
             }
         }

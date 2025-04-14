@@ -2,6 +2,7 @@ package org.example.controller.resident;
 
 import lombok.AllArgsConstructor;
 import org.example.controller.mapper.ResidentDtoMapperService;
+import org.example.service.aop.logging.annotation.LogMethodCall;
 import org.example.service.resident.ResidentServiceResolver;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,6 +23,7 @@ public class ResidentController implements ResidentApi {
     private final ResidentServiceResolver serviceResolver;
 
     @Override
+    @LogMethodCall
     public ResponseEntity<ResidentDto> saveResident(@NotNull @Valid ResidentDtoBody dto) {
         return Optional.ofNullable(dto)
                 .map(ResidentDto.class::cast)

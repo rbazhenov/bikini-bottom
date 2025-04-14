@@ -39,12 +39,13 @@ public class SnailStoreService {
         return repository.findAll();
     }
 
-    public String save(Snail dto) {
+    public Snail save(Snail dto) {
         SnailEntity toSave = mapper.toEntity(dto);
-        return saveEntity(toSave);
+        SnailEntity saved = saveEntity(toSave);
+        return mapper.toModel(saved);
     }
 
-    public String saveEntity(SnailEntity entity) {
-        return repository.save(entity).getId();
+    public SnailEntity saveEntity(SnailEntity entity) {
+        return repository.save(entity);
     }
 }

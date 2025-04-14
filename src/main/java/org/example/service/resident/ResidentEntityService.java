@@ -11,6 +11,7 @@ import org.example.entity.resident.QResidentEntity;
 import org.example.entity.resident.ResidentEntity;
 import org.example.repository.ResidentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -62,8 +63,6 @@ public class ResidentEntityService {
         repository.delete(entity);
     }
 
-    //todo rbs
-    //@PreAuthorize
     public List<ResidentEntity> getResidents() {
         return null;
         //CustomsApplicationEntityService.getApplications

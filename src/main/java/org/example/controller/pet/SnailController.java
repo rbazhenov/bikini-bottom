@@ -1,13 +1,11 @@
 package org.example.controller.pet;
 
 import lombok.AllArgsConstructor;
+import org.example.controller.PetController;
 import org.example.controller.mapper.SnailMapper;
-import org.example.model.pet.Snail;
+import org.example.service.aop.logging.annotation.LogMethodCall;
 import org.example.service.pet.SnailStoreService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
 import www.ru.bikini_bottom.api.swagger.api.SnailApi;
 import www.ru.bikini_bottom.api.swagger.model.SnailDto;
 
@@ -15,31 +13,39 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Size;
 
-@RestController
+@PetController
 @AllArgsConstructor
-//todo RBS-7 logging controllers with aop
 public class SnailController implements SnailApi {
 
-    private SnailStoreService storeService;
-    private SnailMapper mapper;
+    private final SnailStoreService storeService;
+    private final SnailMapper mapper;
 
-    //todo rbs create test
     @Override
-    public ResponseEntity<Void> saveSnail(@Valid SnailDto dto) {
-        storeService.save(mapper.toModel(dto));
-        return ResponseEntity.ok().build();
+    @LogMethodCall
+    public ResponseEntity<SnailDto> saveSnail(@Valid SnailDto dto) {
+        return Optional.ofNullable(dto)
+                .map(mapper::toModel)
+                .map(storeService::save)
+                .map(mapper::toDto)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-//    @GetMapping("/list")
-//    public ResponseEntity<List<Snail>> getAll() {
-//        return ResponseEntity.ok(storeService.getAll());
-//    }
-//
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Optional<Snail>> getOne(@PathVariable(value = "id") String id) {
-//        return ResponseEntity.ok(storeService.getById(id));
-//    }
+    @Override
+    @LogMethodCall
+    public ResponseEntity<SnailDto> getSnailById(@Size(max = 255) String id) {
+        return storeService.getById(id)
+                .map(mapper::toDto)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 
+    @Override
+    @LogMethodCall
+    public ResponseEntity<List<SnailDto>> listSnail() {
+        return ResponseEntity.ok(mapper.toDto(storeService.getAll()));
+    }
 
 }

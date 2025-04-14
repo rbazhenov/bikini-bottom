@@ -3,6 +3,7 @@ package org.example.controller.mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.example.controller.mapper.resident.ResidentDtoMapper;
 import org.example.model.resident.Resident;
+import org.example.service.aop.logging.annotation.LogMethodCall;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -33,7 +34,7 @@ public class ResidentDtoMapperService {
             if (mapperToDto.containsKey(mapper.getModelClass())) {
                 log.warn("Mapper to dto {} is doubled, skip one", mapper.getModelClass().getSimpleName());
             } else {
-                log.info("Put toDto mapper {}", mapper.getModelClass().getSimpleName());
+                log.debug("Put toDto mapper {}", mapper.getModelClass().getSimpleName());
                 mapperToDto.put(mapper.getModelClass(), mapper);
             }
 
@@ -41,7 +42,7 @@ public class ResidentDtoMapperService {
                 log.warn("Mapper from dto {} is doubled, skip one", mapper.getModelClass().getSimpleName());
 
             } else {
-                log.info("Put fromDto mapper {}", mapper.getModelClass().getSimpleName());
+                log.debug("Put fromDto mapper {}", mapper.getModelClass().getSimpleName());
                 mapperToModel.put(mapper.getDtoClass(), mapper);
             }
         }

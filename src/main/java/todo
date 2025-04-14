@@ -6,10 +6,3 @@ amazon s3
 
 
 
-
-
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "", discriminatorType = DiscriminatorType.STRING)
-@DiscriminatorValue
-
-replace UUID.randomUUID().toString() to auto generated when save

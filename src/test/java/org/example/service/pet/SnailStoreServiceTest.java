@@ -19,7 +19,7 @@ class SnailStoreServiceTest {
     void updateLastModifiedTest() {
         Snail snail = new Snail();
         snail.setAge(10);
-        String id = storeService.save(snail);
+        String id = storeService.save(snail).getId();
 
         SnailEntity entity = storeService.getEntityById(id).get();
         ZonedDateTime lmtBefore = entity.getLastModifiedTime();

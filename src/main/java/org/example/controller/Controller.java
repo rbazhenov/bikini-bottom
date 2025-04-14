@@ -10,7 +10,7 @@ public class Controller {
 
     @RequestMapping(path = "/", method = {RequestMethod.GET, RequestMethod.POST})
     public ResponseEntity<String> index() {
-        return ResponseEntity.ok("Greetings from Spring Boot!");
+        return ResponseEntity.ok("Welcome to Bikini bottom!");
     }
 
 }

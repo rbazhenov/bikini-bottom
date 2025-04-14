@@ -13,7 +13,6 @@ public interface LocalResidentEntityMapper extends ResidentEntityMapper<LocalRes
 
     @Override
     default Class<LocalResident> getModelClass(){
-        //todo rbs check is it need?
         return LocalResident.class;
     };
 }

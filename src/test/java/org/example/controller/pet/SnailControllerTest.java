@@ -6,18 +6,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.SpringApplicationTest;
 import org.example.model.pet.MucusLevel;
 import org.example.model.pet.Snail;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+@WithMockUser
 @SpringApplicationTest
 @AutoConfigureMockMvc
 @Sql(scripts = "/db/pet/snail_init.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
@@ -30,7 +30,6 @@ class SnailControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @Disabled // todo rbs
     @Test
     void getOneTest() throws Exception {
         MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(PATH + SNAIL_ID_1)

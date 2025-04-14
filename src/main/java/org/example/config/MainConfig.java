@@ -2,16 +2,21 @@ package org.example.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
+import org.example.context.ContextConfiguration;
 import org.example.controller.BpController;
 import org.example.controller.mapper.BpMappers;
 import org.example.entity.BpEntity;
 import org.example.entity.mapper.BpEntityMappers;
 import org.example.repository.BpRepository;
+import org.example.security.WebSecurityConfiguration;
 import org.example.service.BpService;
+import org.example.service.aop.logging.LogConfig;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.auditing.DateTimeProvider;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -34,7 +39,13 @@ import java.util.Optional;
         BpEntityMappers.class,
         BpMappers.class,
 })
+@Import(value = {
+        LogConfig.class,
+        WebSecurityConfiguration.class,
+        ContextConfiguration.class,
+})
 @EnableJpaAuditing(dateTimeProviderRef = "auditingDateTimeProvider")
+@EnableAspectJAutoProxy
 public class MainConfig {
 
     @Bean

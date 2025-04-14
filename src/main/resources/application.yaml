@@ -1,1 +1,7 @@
 spring.application.name: bikini-bottom
+
+log.enabled: true
+
+test.controller:
+  enabled: false
+  url: /test
