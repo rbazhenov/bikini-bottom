@@ -9,10 +9,12 @@ import org.example.entity.BpEntity;
 import org.example.entity.mapper.BpEntityMappers;
 import org.example.integration.BpIntegration;
 import org.example.repository.BpRepository;
+import org.example.scheduler.BpSheduler;
 import org.example.security.WebSecurityConfiguration;
 import org.example.service.BpService;
 import org.example.service.aop.logging.LogConfig;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -32,7 +34,7 @@ import java.util.Optional;
 @EnableKafka
 @EnableAsync
 @EnableFeignClients(basePackageClasses = BpIntegration.class)
-//@EnableConfigurationProperties todo RBS-4
+@EnableConfigurationProperties
 @EntityScan(basePackageClasses = BpEntity.class)
 @EnableJpaRepositories(basePackageClasses = BpRepository.class)
 @ComponentScan(basePackageClasses = {
@@ -40,6 +42,7 @@ import java.util.Optional;
         BpController.class,
         BpEntityMappers.class,
         BpMappers.class,
+        BpSheduler.class,
 })
 @Import(value = {
         LogConfig.class,

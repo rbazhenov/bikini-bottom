@@ -1,0 +1,9 @@
+https://www.baeldung.com/ops/kafka-new-topic-docker-compose
+
+Создание топика bikini-checks
+docker-compose exec kafka-1 kafka-topics.sh --create --topic bikini-checks --partitions 1 --replication-factor 1 --bootstrap-server localhost:9092
+
+Start consumer for topic bikini-checks
+docker-compose exec kafka-1 kafka-console-consumer.sh --topic bikini-checks --from-beginning --bootstrap-server localhost:9092
+
+docker-compose exec kafka-1 kafka-console-producer.sh --topic bikini-checks --broker-list localhost:29092

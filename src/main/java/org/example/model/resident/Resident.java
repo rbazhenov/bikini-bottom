@@ -17,4 +17,6 @@ public abstract class Resident {
     private Comment comment;
     private Region region;
     private List<File> files;
+    private Boolean validated;
+    private String validationId;
 }

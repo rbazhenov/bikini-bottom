@@ -48,4 +48,8 @@ public abstract class ResidentEntity extends BaseEntity {
             inverseJoinColumns = @JoinColumn(name = "file_id")
     )
     private List<FileEntity> files;
+
+    private Boolean validated;
+
+    private String validationId;
 }

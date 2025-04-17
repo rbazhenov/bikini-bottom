@@ -6,5 +6,16 @@ test.controller:
   enabled: false
   url: /bikini-bottom/test
 
+scheduler:
+  enabled: true
+  validation.cron: 0 * * * * *
+
 integration:
-  bikini.validation.url: http://localhost:8081
+  validation:
+    url: http://localhost:8081
+    kafka:
+      enabled: true
+      topic: bikini-checks
+      server: localhost:29092
+      clientId: client_id
+      groupId: group_id

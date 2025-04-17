@@ -5,7 +5,7 @@ import www.ru.bikini_validation.api.swagger.api.BikiniValidationApi;
 
 @FeignClient(
         name = "bikini-validation",
-        url = "${integration.bikini.validation.url}"
+        url = "${integration.validation.url}"
 )
 public interface BikiniValidationClient extends BikiniValidationApi {
 }
