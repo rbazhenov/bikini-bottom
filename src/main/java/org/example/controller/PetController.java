@@ -11,7 +11,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 @RestController
-@PreAuthorize("@currentUser.getLogin() == 'user'")//todo rbs edit. check role
+@PreAuthorize("@currentUser.getLogin() == 'user'")
 public @interface PetController {
 
 }
