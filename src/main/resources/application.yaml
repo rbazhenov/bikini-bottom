@@ -19,3 +19,11 @@ integration:
       server: localhost:29092
       clientId: client_id
       groupId: group_id
+
+voron:
+  address: addressOne, addressTwo
+  on: true
+
+redis:
+  url: localhost
+  port: 6379

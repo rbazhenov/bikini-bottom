@@ -1,5 +1,9 @@
 package org.example.service.pet;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.lettuce.core.api.StatefulRedisConnection;
+import io.lettuce.core.api.sync.RedisCommands;
 import lombok.AllArgsConstructor;
 import org.example.entity.mapper.pet.SnailMapper;
 import org.example.entity.pet.SnailEntity;
@@ -16,8 +20,33 @@ import java.util.Optional;
 @AllArgsConstructor
 public class SnailStoreService {
 
-    private SnailRepository repository;
-    private SnailMapper mapper;
+    private final static Long TTL_SECONDS = 10L;
+    private final SnailRepository repository;
+    private final SnailMapper mapper;
+    private final StatefulRedisConnection<String, String> redisConnection;
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
+    public Optional<Snail> getCashedById(String id) {
+        try {
+            //todo rbs use async
+            RedisCommands<String, String> syncCommands = redisConnection.sync();
+            String key = "Snail:%s".formatted(id);
+            String value = syncCommands.get(key);
+            if (value != null) {
+                return Optional.of(objectMapper.readValue(value, Snail.class));
+            }
+
+            Optional<Snail> entity = getById(id);
+            if (entity.isPresent()) {
+                syncCommands.setex(key, TTL_SECONDS, objectMapper.writeValueAsString(entity.get()));
+            }
+
+            return entity;
+
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     @Transactional(readOnly = true)
     public Optional<Snail> getById(String id) {

@@ -36,7 +36,7 @@ public class SnailController implements SnailApi {
     @Override
     @LogMethodCall
     public ResponseEntity<SnailDto> getSnailById(@Size(max = 255) String id) {
-        return storeService.getById(id)
+        return storeService.getCashedById(id)
                 .map(mapper::toDto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());

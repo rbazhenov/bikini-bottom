@@ -1,6 +1,9 @@
 package org.example.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
+import io.lettuce.core.RedisClient;
+import io.lettuce.core.RedisURI;
+import io.lettuce.core.api.StatefulRedisConnection;
 import jakarta.persistence.EntityManager;
 import org.example.context.ContextConfiguration;
 import org.example.controller.BpController;
@@ -13,6 +16,7 @@ import org.example.scheduler.BpSheduler;
 import org.example.security.WebSecurityConfiguration;
 import org.example.service.BpService;
 import org.example.service.aop.logging.LogConfig;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -48,6 +52,7 @@ import java.util.Optional;
         LogConfig.class,
         WebSecurityConfiguration.class,
         ContextConfiguration.class,
+//        MyConfiguration.class
 })
 @EnableJpaAuditing(dateTimeProviderRef = "auditingDateTimeProvider")
 @EnableAspectJAutoProxy
@@ -61,5 +66,14 @@ public class MainConfig {
     @Bean
     public JPAQueryFactory jpaQuery(EntityManager entityManager) {
         return new JPAQueryFactory(entityManager);
+    }
+
+    @Bean
+    public StatefulRedisConnection<String, String> redisConnection(@Value("${redis.url}") String url,
+                                                                   @Value("${redis.port}") Integer port) {
+        RedisURI redisURI = RedisURI.Builder.redis(url, port).build();
+        RedisClient redisClient = RedisClient.create(redisURI);
+
+        return redisClient.connect();
     }
 }
